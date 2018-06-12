@@ -6,29 +6,41 @@ import java.awt.event.ActionListener;
 public class GuiFrame extends JFrame
 {
 
-    static JFrame guiFrame;
+    final JFrame guiFrame;
+    final JPanel textPanel;
+    final JPanel buttonPanel;
 
     public GuiFrame()
     {
         this.guiFrame = new JFrame();
-        createWindow();
+        this.textPanel = new JPanel();
+        this.buttonPanel = new JPanel();
+        setupGuiFrame();
+        createTextField();
+        createButtons();
+
+        guiFrame.setVisible(true);
     }
 
-    private static void createWindow(){
+    private void setupGuiFrame(){
         //make sure the program exits when the frame closes
         guiFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        guiFrame.setTitle("Example GUI");
+        guiFrame.setTitle("RocketLeagueLauncher");
         guiFrame.setSize(300,250);
         //This will center the JFrame in the middle of the screen
         guiFrame.setLocationRelativeTo(null);
+    }
 
-        JPanel textPanel = new JPanel();
-
+    private void createTextField(){
         JLabel label = new JLabel("Select resolution:");
+        textPanel.add(label);
+        guiFrame.add(textPanel);
+    }
 
+    private void createButtons(){
         JButton buttonNormal = new JButton("1920 x 1024");
         JButton buttonWide = new JButton("3840 x 1024");
-        buttonWide.setSize(40,40);
+//        buttonWide.setSize(40,40);
 
         buttonNormal.addActionListener(new ActionListener()
         {
@@ -39,13 +51,9 @@ public class GuiFrame extends JFrame
             }
         });
 
-
-        guiFrame.add(textPanel);
-
-        textPanel.add(label);
-        textPanel.add(buttonNormal);
-        textPanel.add(buttonWide);
-
-        guiFrame.setVisible(true);
+        buttonPanel.add(buttonNormal);
+        buttonPanel.add(buttonWide);
+        
+        guiFrame.add(buttonPanel);
     }
 }
