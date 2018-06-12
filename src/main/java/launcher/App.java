@@ -1,3 +1,5 @@
+package main.java.launcher;
+
 import javax.swing.*;
 
 public class App
