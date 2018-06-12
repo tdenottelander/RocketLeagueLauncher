@@ -7,15 +7,18 @@ public class GuiFrame extends JFrame
 {
 
     final JFrame guiFrame;
+    final JPanel mainPane;
     final JPanel textPanel;
     final JPanel buttonPanel;
 
     public GuiFrame()
     {
         this.guiFrame = new JFrame();
+        this.mainPane = new JPanel();
         this.textPanel = new JPanel();
         this.buttonPanel = new JPanel();
         setupGuiFrame();
+        setupMainPane();
         createTextField();
         createButtons();
 
@@ -31,16 +34,20 @@ public class GuiFrame extends JFrame
         guiFrame.setLocationRelativeTo(null);
     }
 
+    private void setupMainPane(){
+        mainPane.setLayout(new BoxLayout(mainPane, BoxLayout.PAGE_AXIS));
+        guiFrame.add(mainPane);
+    }
+
     private void createTextField(){
         JLabel label = new JLabel("Select resolution:");
         textPanel.add(label);
-        guiFrame.add(textPanel);
+        mainPane.add(textPanel);
     }
 
     private void createButtons(){
         JButton buttonNormal = new JButton("1920 x 1024");
         JButton buttonWide = new JButton("3840 x 1024");
-//        buttonWide.setSize(40,40);
 
         buttonNormal.addActionListener(new ActionListener()
         {
@@ -53,7 +60,7 @@ public class GuiFrame extends JFrame
 
         buttonPanel.add(buttonNormal);
         buttonPanel.add(buttonWide);
-        
-        guiFrame.add(buttonPanel);
+
+        mainPane.add(buttonPanel);
     }
 }
