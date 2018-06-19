@@ -19,6 +19,7 @@ public class GuiFrame extends JFrame
     final JPanel buttonPanel;
     JButton buttonNormal;
     JButton buttonWide;
+    JButton buttonLaunchGame;
 
     public GuiFrame()
     {
@@ -72,11 +73,16 @@ public class GuiFrame extends JFrame
     private void createButtons(){
         buttonNormal = new JButton("1920 x 1024");
         buttonWide = new JButton("3840 x 1024");
+        buttonLaunchGame = new JButton("Launch Rocket League");
 
         buttonPanel.add(buttonNormal);
         buttonPanel.add(buttonWide);
 
         mainPane.add(buttonPanel);
+
+        JPanel launchGamePanel = new JPanel();
+        launchGamePanel.add(buttonLaunchGame);
+        mainPane.add(launchGamePanel);
     }
 
     public void setActionButtonNormal(ActionListener actionListener){
@@ -85,5 +91,9 @@ public class GuiFrame extends JFrame
 
     public void setActionButtonWide(ActionListener actionListener){
         buttonWide.addActionListener(actionListener);
+    }
+
+    public void setActionButtonLaunchGame(ActionListener actionListener){
+        buttonLaunchGame.addActionListener(actionListener);
     }
 }
