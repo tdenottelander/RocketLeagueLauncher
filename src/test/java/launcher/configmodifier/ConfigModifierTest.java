@@ -15,7 +15,7 @@ public class ConfigModifierTest
 
     @BeforeAll
     public static void init(){
-        configModifier = new ConfigModifier();
+        configModifier = new ConfigModifier("src/test/resources/DummyInput.ini");
     }
 
     /**

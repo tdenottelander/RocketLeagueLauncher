@@ -79,7 +79,11 @@ public class GuiFrame extends JFrame
         mainPane.add(buttonPanel);
     }
 
-    public void setActionButton1(ActionListener actionListener){
+    public void setActionButtonNormal(ActionListener actionListener){
         buttonNormal.addActionListener(actionListener);
+    }
+
+    public void setActionButtonWide(ActionListener actionListener){
+        buttonWide.addActionListener(actionListener);
     }
 }

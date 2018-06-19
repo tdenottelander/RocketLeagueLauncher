@@ -1,14 +1,13 @@
 package main.java.launcher;
 
-import main.java.launcher.configmodifier.ConfigModifier;
+import main.java.launcher.configmodifier.RLConfigModifier;
 
-import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class App
 {
-    static ConfigModifier configModifier;
+    static RLConfigModifier configModifier;
 
     public static void main(String[] args)
     {
@@ -17,18 +16,29 @@ public class App
         GuiFrame guiFrame = new GuiFrame();
 
         String filePath = "src/test/resources/TASystemSettings.ini";
-        configModifier = new ConfigModifier(filePath);
+        configModifier = new RLConfigModifier(filePath);
         configModifier.readFile();
         configModifier.setOutputFilePath(filePath);
 
-        guiFrame.setActionButton1(new ActionListener()
+        guiFrame.setActionButtonNormal(new ActionListener()
         {
             @Override
             public void actionPerformed(ActionEvent e)
             {
-//                configModifier.replaceString("ResX=1920","ResX=3840");
-//                configModifier.writeFile();
-                System.out.println("TEST");
+                configModifier.setNormal();
+                configModifier.writeFile();
+                System.out.println("Button Normal Click");
+            }
+        });
+
+        guiFrame.setActionButtonWide(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                configModifier.setWide();
+                configModifier.writeFile();
+                System.out.println("Button Wide Click");
             }
         });
     }

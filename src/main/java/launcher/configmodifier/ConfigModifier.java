@@ -5,9 +5,9 @@ import java.util.regex.Pattern;
 
 public class ConfigModifier
 {
-    private File settingsFile;
-    private String content;
-    private String outputFilePath;
+    protected File settingsFile;
+    protected String content;
+    protected String outputFilePath;
 
     /**
      * Create a ConfigModifier object with loading the file to be changed.
@@ -18,28 +18,51 @@ public class ConfigModifier
     }
 
     /**
-     * Create a ConfigModifier object without setting the settingsFile.
+     * Loads the file from a filepath.
+     * @param filePath the path to the file to read
      */
-    public ConfigModifier(){}
-
     private void loadFile(String filePath) {
         settingsFile = new File(filePath);
     }
 
+    /**
+     * Reads the contents of the file to this object
+     */
     public void readFile(){
         content = readFileToString(settingsFile);
     }
 
+    /**
+     * Sets the filepath for the output file
+     * @param outputFilePath The path for the output file
+     */
     public void setOutputFilePath(String outputFilePath){
         this.outputFilePath = outputFilePath;
     }
 
+    /**
+     * Write the file to the specified outputPath.
+     */
     public void writeFile(){
         writeFile(outputFilePath, content);
     }
 
+    /**
+     * Returns the settingsFile.
+     * @return the settingsFile
+     */
     public File getFile(){
         return this.settingsFile;
+    }
+
+    /**
+     * Replace some part of the string with another string.
+     * @param stringToBeReplaced The string that needs to be replaced
+     * @param replaceToString The string that it needs to be replaced to
+     * @return The resulting string with the replacement
+     */
+    public void replaceString(String stringToBeReplaced, String replaceToString){
+        content = content.replaceFirst(Pattern.quote(stringToBeReplaced), replaceToString);
     }
 
     /**
@@ -66,16 +89,6 @@ public class ConfigModifier
             e.printStackTrace();
         }
         return inputBuffer.toString();
-    }
-
-    /**
-     * Replace some part of the string with another string.
-     * @param stringToBeReplaced The string that needs to be replaced
-     * @param replaceToString The string that it needs to be replaced to
-     * @return The resulting string with the replacement
-     */
-    public void replaceString(String stringToBeReplaced, String replaceToString){
-        content = content.replaceFirst(Pattern.quote(stringToBeReplaced), replaceToString);
     }
 
     /**
