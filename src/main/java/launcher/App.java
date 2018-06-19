@@ -42,8 +42,16 @@ public class App
             {
                 configModifier.setWide();
                 configModifier.writeFile();
-                runGame();
                 System.out.println("Button Wide Click");
+            }
+        });
+
+        guiFrame.setActionButtonLaunchGame(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                launchGame();
             }
         });
     }
@@ -71,7 +79,7 @@ public class App
 
     }
 
-    private static void runGame(){
+    private static void launchGame(){
         try
         {
             Runtime.getRuntime().exec(executablePath);
