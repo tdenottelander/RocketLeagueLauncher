@@ -39,7 +39,7 @@ public class ConfigModifierTest
             "ResX=1920\n" +
             "ResY=1080\n" +
             "Borderless=True";
-        configModifier.changeContent("src/test/resources/DummyInput.ini", "src/test/resources/DummyOutput.ini");
+        //configModifier.changeContent("src/test/resources/DummyInput.ini", "src/test/resources/DummyOutput.ini");
 
         //assert
 

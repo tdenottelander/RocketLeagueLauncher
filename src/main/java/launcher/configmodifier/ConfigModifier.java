@@ -5,8 +5,9 @@ import java.util.regex.Pattern;
 
 public class ConfigModifier
 {
-
     private File settingsFile;
+    private String content;
+    private String outputFilePath;
 
     /**
      * Create a ConfigModifier object with loading the file to be changed.
@@ -22,7 +23,19 @@ public class ConfigModifier
     public ConfigModifier(){}
 
     private void loadFile(String filePath) {
-        settingsFile = new File("src/test/resources/TASystemSettings.ini");
+        settingsFile = new File(filePath);
+    }
+
+    public void readFile(){
+        content = readFileToString(settingsFile);
+    }
+
+    public void setOutputFilePath(String outputFilePath){
+        this.outputFilePath = outputFilePath;
+    }
+
+    public void writeFile(){
+        writeFile(outputFilePath, content);
     }
 
     public File getFile(){
@@ -30,29 +43,14 @@ public class ConfigModifier
     }
 
     /**
-     * Change the content of a file and write the changes to a file.
-     * @param inputFilePath The path to the input file
-     * @param outputFilePath The path to the output file (possibly the same as input)
-     */
-    public void changeContent(String inputFilePath, String outputFilePath){
-        String content = readFileToString(inputFilePath);
-
-        //System.out.println(content);
-
-        content = replaceString(content,"ResX=1920", "ResX=3840");
-
-        writeFile(outputFilePath, content);
-    }
-
-    /**
      * Reading a file to a string.
-     * @param filePath the path to the file
+     * @param file the file to read
      * @return A string containing the content of the file
      */
-    public String readFileToString(String filePath){
+    private String readFileToString(File file){
         StringBuffer inputBuffer = new StringBuffer();
         try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader(filePath));
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
             String line;
 
             while ((line = bufferedReader.readLine()) != null)
@@ -72,13 +70,12 @@ public class ConfigModifier
 
     /**
      * Replace some part of the string with another string.
-     * @param content The content that needs a change
      * @param stringToBeReplaced The string that needs to be replaced
      * @param replaceToString The string that it needs to be replaced to
      * @return The resulting string with the replacement
      */
-    public String replaceString(String content, String stringToBeReplaced, String replaceToString){
-        return content.replaceFirst(Pattern.quote(stringToBeReplaced), replaceToString);
+    public void replaceString(String stringToBeReplaced, String replaceToString){
+        content = content.replaceFirst(Pattern.quote(stringToBeReplaced), replaceToString);
     }
 
     /**
@@ -86,7 +83,7 @@ public class ConfigModifier
      * @param filePath The output path of the file
      * @param content The content that needs to be written to the file
      */
-    public void writeFile(String filePath, String content){
+    private void writeFile(String filePath, String content){
         try {
             FileOutputStream fileOutputStream = new FileOutputStream(filePath);
             fileOutputStream.write(content.getBytes());

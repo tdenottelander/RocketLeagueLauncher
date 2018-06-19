@@ -17,6 +17,8 @@ public class GuiFrame extends JFrame
     final JPanel textPanel;
     final JLabel imageLabel;
     final JPanel buttonPanel;
+    JButton buttonNormal;
+    JButton buttonWide;
 
     public GuiFrame()
     {
@@ -68,21 +70,16 @@ public class GuiFrame extends JFrame
     }
 
     private void createButtons(){
-        JButton buttonNormal = new JButton("1920 x 1024");
-        JButton buttonWide = new JButton("3840 x 1024");
-
-        buttonNormal.addActionListener(new ActionListener()
-        {
-            @Override
-            public void actionPerformed(ActionEvent e)
-            {
-                System.out.println("Button 1");
-            }
-        });
+        buttonNormal = new JButton("1920 x 1024");
+        buttonWide = new JButton("3840 x 1024");
 
         buttonPanel.add(buttonNormal);
         buttonPanel.add(buttonWide);
 
         mainPane.add(buttonPanel);
+    }
+
+    public void setActionButton1(ActionListener actionListener){
+        buttonNormal.addActionListener(actionListener);
     }
 }
