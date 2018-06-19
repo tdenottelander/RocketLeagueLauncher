@@ -11,6 +11,7 @@ public class App
     static RLConfigModifier configModifier;
     static final String settingsFilePath = "src/main/resources/settings.txt";
     static String RLSettingsFileLocation;
+    static String executablePath;
 
     public static void main(String[] args)
     {
@@ -41,6 +42,7 @@ public class App
             {
                 configModifier.setWide();
                 configModifier.writeFile();
+                runGame();
                 System.out.println("Button Wide Click");
             }
         });
@@ -53,10 +55,12 @@ public class App
         File file = new File(settingsFilePath);
         try {
             BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
-            String line = bufferedReader.readLine();
-            if(line.contains("location")){
-                String[] lines = line.split("=");
-                RLSettingsFileLocation = lines[1];
+            String line;
+            while((line = bufferedReader.readLine()) != null)
+            if(line.contains("settingslocation")){
+                RLSettingsFileLocation = line.split("=")[1];
+            } else if (line.contains("executablepath")){
+                executablePath = line.split("=")[1];
             }
             bufferedReader.close();
         } catch (FileNotFoundException e) {
@@ -65,5 +69,15 @@ public class App
             e.printStackTrace();
         }
 
+    }
+
+    private static void runGame(){
+        try
+        {
+            Runtime.getRuntime().exec(executablePath);
+        } catch (IOException e)
+        {
+            e.printStackTrace();
+        }
     }
 }

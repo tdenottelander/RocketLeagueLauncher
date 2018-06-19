@@ -1,1 +1,2 @@
-location=src/test/resources/
+settingslocation=src/test/resources/
+executablepath=open /Applications/TextEdit.app
