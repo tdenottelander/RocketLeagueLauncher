@@ -2,7 +2,6 @@ package main.java.launcher;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -13,9 +12,9 @@ public class GuiFrame extends JFrame
 {
 
     final JFrame guiFrame;
-    final JPanel mainPane;
+    final JPanel mainPanel;
+    final JPanel imagePanel;
     final JPanel textPanel;
-    final JLabel imageLabel;
     final JPanel buttonPanel;
     JButton buttonNormal;
     JButton buttonWide;
@@ -24,8 +23,8 @@ public class GuiFrame extends JFrame
     public GuiFrame()
     {
         this.guiFrame = new JFrame();
-        this.mainPane = new JPanel();
-        this.imageLabel = new JLabel();
+        this.mainPanel = new JPanel();
+        this.imagePanel = new JPanel();
         this.textPanel = new JPanel();
         this.buttonPanel = new JPanel();
         setupGuiFrame();
@@ -47,8 +46,8 @@ public class GuiFrame extends JFrame
     }
 
     private void setupMainPane(){
-        mainPane.setLayout(new BoxLayout(mainPane, BoxLayout.PAGE_AXIS));
-        guiFrame.add(mainPane);
+        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.PAGE_AXIS));
+        guiFrame.add(mainPanel);
     }
 
     private void createImage(){
@@ -61,13 +60,14 @@ public class GuiFrame extends JFrame
             e.printStackTrace();
         }
         JLabel picLabel = new JLabel(new ImageIcon(img));
-        textPanel.add(picLabel);
+        imagePanel.add(picLabel);
+        mainPanel.add(imagePanel);
     }
 
     private void createTextField(){
         JLabel label = new JLabel("Select resolution:");
         textPanel.add(label);
-        mainPane.add(textPanel);
+        mainPanel.add(textPanel);
     }
 
     private void createButtons(){
@@ -78,11 +78,11 @@ public class GuiFrame extends JFrame
         buttonPanel.add(buttonNormal);
         buttonPanel.add(buttonWide);
 
-        mainPane.add(buttonPanel);
+        mainPanel.add(buttonPanel);
 
         JPanel launchGamePanel = new JPanel();
         launchGamePanel.add(buttonLaunchGame);
-        mainPane.add(launchGamePanel);
+        mainPanel.add(launchGamePanel);
     }
 
     public void setActionButtonNormal(ActionListener actionListener){
