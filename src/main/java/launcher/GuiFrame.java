@@ -2,6 +2,7 @@ package main.java.launcher;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -12,7 +13,9 @@ public class GuiFrame extends JFrame
 {
 
     final JFrame guiFrame;
+    final JPanel globalPanel;
     final JPanel mainPanel;
+    final SettingsPanel settingsPanel;
     final JPanel imagePanel;
     final JPanel textPanel;
     final JPanel buttonPanel;
@@ -23,12 +26,16 @@ public class GuiFrame extends JFrame
     public GuiFrame()
     {
         this.guiFrame = new JFrame();
+        this.globalPanel = new JPanel();
         this.mainPanel = new JPanel();
+        this.settingsPanel = new SettingsPanel();
         this.imagePanel = new JPanel();
         this.textPanel = new JPanel();
         this.buttonPanel = new JPanel();
         setupGuiFrame();
-        setupMainPane();
+        setupGlobalPanel();
+        setupMainPanel();
+        setupSettingsPanel();
         createImage();
         createTextField();
         createButtons();
@@ -40,14 +47,28 @@ public class GuiFrame extends JFrame
         //make sure the program exits when the frame closes
         guiFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         guiFrame.setTitle("RocketLeagueLauncher");
-        guiFrame.setSize(300,350);
+        guiFrame.setSize(500,350);
         //This will center the JFrame in the middle of the screen
         guiFrame.setLocationRelativeTo(null);
     }
 
-    private void setupMainPane(){
+    private void setupGlobalPanel(){
+        globalPanel.setLayout(new FlowLayout());
+        globalPanel.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+        guiFrame.add(globalPanel);
+    }
+
+    private void setupMainPanel(){
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.PAGE_AXIS));
-        guiFrame.add(mainPanel);
+        mainPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.BLUE), "Main"));
+        mainPanel.setSize(200, 350);
+        globalPanel.add(mainPanel);
+    }
+
+    private void setupSettingsPanel()
+    {
+        settingsPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.BLUE), "Settings"));
+        globalPanel.add(settingsPanel);
     }
 
     private void createImage(){
