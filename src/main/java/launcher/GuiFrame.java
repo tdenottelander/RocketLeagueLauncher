@@ -12,7 +12,6 @@ import java.io.IOException;
 public class GuiFrame extends JFrame
 {
 
-    final JFrame guiFrame;
     final JPanel globalPanel;
     final JPanel mainPanel;
     final SettingsPanel settingsPanel;
@@ -25,7 +24,6 @@ public class GuiFrame extends JFrame
 
     public GuiFrame()
     {
-        this.guiFrame = new JFrame();
         this.globalPanel = new JPanel();
         this.mainPanel = new JPanel();
         this.settingsPanel = new SettingsPanel();
@@ -40,22 +38,22 @@ public class GuiFrame extends JFrame
         createTextField();
         createButtons();
 
-        guiFrame.setVisible(true);
+        this.setVisible(true);
     }
 
     private void setupGuiFrame(){
         //make sure the program exits when the frame closes
-        guiFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        guiFrame.setTitle("RocketLeagueLauncher");
-        guiFrame.setSize(500,350);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setTitle("RocketLeagueLauncher");
+        this.setSize(500,350);
         //This will center the JFrame in the middle of the screen
-        guiFrame.setLocationRelativeTo(null);
+        this.setLocationRelativeTo(null);
     }
 
     private void setupGlobalPanel(){
         globalPanel.setLayout(new FlowLayout());
         globalPanel.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
-        guiFrame.add(globalPanel);
+        this.add(globalPanel);
     }
 
     private void setupMainPanel(){
