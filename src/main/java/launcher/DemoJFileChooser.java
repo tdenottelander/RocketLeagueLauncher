@@ -6,9 +6,11 @@ import java.awt.*;
 import java.util.*;
 
 
-public class DemoJFileChooser extends JPanel
-    implements ActionListener {
+public class DemoJFileChooser extends JPanel implements ActionListener
+{
     JButton go;
+
+    JLabel outputLabel;
 
     JFileChooser chooser;
     String choosertitle;
@@ -19,13 +21,17 @@ public class DemoJFileChooser extends JPanel
         add(go);
     }
 
+    public void setOutputLabel(JLabel outputLabel){
+        this.outputLabel = outputLabel;
+    }
+
     public void actionPerformed(ActionEvent e) {
         int result;
 
         chooser = new JFileChooser();
         chooser.setCurrentDirectory(new java.io.File("."));
         chooser.setDialogTitle(choosertitle);
-        chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
         //
         // disable the "All files" option.
         //
@@ -36,6 +42,7 @@ public class DemoJFileChooser extends JPanel
                 +  chooser.getCurrentDirectory());
             System.out.println("getSelectedFile() : "
                 +  chooser.getSelectedFile());
+            outputLabel.setText(chooser.getSelectedFile().toString());
         }
         else {
             System.out.println("No Selection ");
