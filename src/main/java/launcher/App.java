@@ -24,7 +24,7 @@ public class App
         configModifier.readFile();
         configModifier.setOutputFilePath(filePath);
 
-        guiFrame.setActionButtonNormal(new ActionListener()
+        guiFrame.mainPanel.setActionButtonNormal(new ActionListener()
         {
             @Override
             public void actionPerformed(ActionEvent e)
@@ -35,7 +35,7 @@ public class App
             }
         });
 
-        guiFrame.setActionButtonWide(new ActionListener()
+        guiFrame.mainPanel.setActionButtonWide(new ActionListener()
         {
             @Override
             public void actionPerformed(ActionEvent e)
@@ -46,7 +46,7 @@ public class App
             }
         });
 
-        guiFrame.setActionButtonLaunchGame(new ActionListener()
+        guiFrame.mainPanel.setActionButtonLaunchGame(new ActionListener()
         {
             @Override
             public void actionPerformed(ActionEvent e)
