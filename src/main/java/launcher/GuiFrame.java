@@ -12,7 +12,7 @@ import java.io.IOException;
 public class GuiFrame extends JFrame
 {
 
-    final JPanel globalPanel;
+    final JTabbedPane globalPanel;
     final JPanel mainPanel;
     final SettingsPanel settingsPanel;
     final JPanel imagePanel;
@@ -24,7 +24,7 @@ public class GuiFrame extends JFrame
 
     public GuiFrame()
     {
-        this.globalPanel = new JPanel();
+        this.globalPanel = new JTabbedPane();
         this.mainPanel = new JPanel();
         this.settingsPanel = new SettingsPanel();
         this.imagePanel = new JPanel();
@@ -45,14 +45,12 @@ public class GuiFrame extends JFrame
         //make sure the program exits when the frame closes
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setTitle("RocketLeagueLauncher");
-        this.setSize(500,350);
+        this.setSize(500,600);
         //This will center the JFrame in the middle of the screen
         this.setLocationRelativeTo(null);
     }
 
     private void setupGlobalPanel(){
-        globalPanel.setLayout(new FlowLayout());
-        globalPanel.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
         this.add(globalPanel);
     }
 
@@ -60,13 +58,13 @@ public class GuiFrame extends JFrame
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.PAGE_AXIS));
         mainPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.BLUE), "Main"));
         mainPanel.setSize(200, 350);
-        globalPanel.add(mainPanel);
+        globalPanel.addTab("Main", mainPanel);
     }
 
     private void setupSettingsPanel()
     {
         settingsPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.BLUE), "Settings"));
-        globalPanel.add(settingsPanel);
+        globalPanel.addTab("Settings", settingsPanel);
     }
 
     private void createImage(){
