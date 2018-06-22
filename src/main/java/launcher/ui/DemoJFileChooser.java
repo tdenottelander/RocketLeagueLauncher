@@ -37,9 +37,9 @@ public class DemoJFileChooser extends JPanel implements ActionListener
         chooser.setAcceptAllFileFilterUsed(false);
         //
         if (chooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
-            System.out.println("getCurrentDirectory(): "
-                +  chooser.getCurrentDirectory());
-            System.out.println("getSelectedFile() : "
+//            System.out.println("getCurrentDirectory(): "
+//                +  chooser.getCurrentDirectory());
+            System.out.println("set path to: "
                 +  chooser.getSelectedFile());
             outputLabel.setText(chooser.getSelectedFile().toString());
         }

@@ -5,6 +5,7 @@ import java.awt.*;
 
 public class SettingsPanel extends JPanel
 {
+    private JLabel selectOSLabel;
     private JRadioButton radioButtonWin;
     private JRadioButton radioButtonMac;
 
@@ -16,6 +17,8 @@ public class SettingsPanel extends JPanel
         super();
         setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 
+        selectOSLabel = new JLabel("Select Operating System:");
+        add(selectOSLabel);
         createRadioButtons();
 
         addFileChooserField(pathToSettingsFile = new JLabel(), "Path to settings file:");
@@ -47,7 +50,7 @@ public class SettingsPanel extends JPanel
         buttonGroup.add(radioButtonWin);
         buttonGroup.add(radioButtonMac);
 
-        JPanel radioPanel = new JPanel(new GridLayout(0, 1));
+        JPanel radioPanel = new JPanel();
         radioPanel.add(radioButtonWin);
         radioPanel.add(radioButtonMac);
         this.add(radioPanel);
