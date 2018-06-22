@@ -9,30 +9,25 @@ import java.io.*;
 public class App
 {
     static RLConfigModifier configModifier;
-    static final String settingsFilePath = "src/main/resources/settings.txt";
+    static String settingsFilePath;
     static String RLSettingsFileLocation;
     static String executablePath;
     static GuiFrame guiFrame;
 
     public static void main(String[] args)
     {
-        readSettings();
-
         guiFrame = new GuiFrame();
-
-        String filePath = RLSettingsFileLocation + "TASystemSettings.ini";
-        configModifier = new RLConfigModifier(filePath);
-        configModifier.readFile();
-        configModifier.setOutputFilePath(filePath);
 
         guiFrame.mainPanel.setActionButtonNormal(new ActionListener()
         {
             @Override
             public void actionPerformed(ActionEvent e)
             {
+                if(settingsFilePath == null) setSettingsFilePath();
+                setupRLConfigModifier();
                 configModifier.setNormal();
                 configModifier.writeFile();
-                System.out.println("Button Normal Click");
+                System.out.println("Set resolution to 1920x1080");
             }
         });
 
@@ -41,9 +36,11 @@ public class App
             @Override
             public void actionPerformed(ActionEvent e)
             {
+                if(settingsFilePath == null) setSettingsFilePath();
+                setupRLConfigModifier();
                 configModifier.setWide();
                 configModifier.writeFile();
-                System.out.println("Button Wide Click");
+                System.out.println("Set resulotion to 3840x1080");
             }
         });
 
@@ -55,6 +52,17 @@ public class App
                 launchGame();
             }
         });
+    }
+
+    private static void setupRLConfigModifier(){
+        configModifier = new RLConfigModifier(settingsFilePath);
+        configModifier.readFile();
+        configModifier.setOutputFilePath(settingsFilePath);
+    }
+
+    private static void setSettingsFilePath()
+    {
+        settingsFilePath = guiFrame.getSettingsPath();
     }
 
     /**

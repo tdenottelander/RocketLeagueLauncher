@@ -38,4 +38,8 @@ public class GuiFrame extends JFrame
     {
         return settingsPanel.getPathToExecutable();
     }
+
+    public String getSettingsPath(){
+        return settingsPanel.getPathToSettingsFile();
+    }
 }
