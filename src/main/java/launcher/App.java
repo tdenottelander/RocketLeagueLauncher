@@ -46,7 +46,8 @@ public class App
         {
             executablePath = guiFrame.getExecutablePath();
             if(executablePath == null) throw new IOException();
-            Runtime.getRuntime().exec("open " + executablePath);
+            String prefix = guiFrame.isWindows() ? "" : "open ";
+            Runtime.getRuntime().exec(prefix + executablePath);
         } catch (IOException e)
         {
             System.out.println("The path to the executable is not properly set.");
@@ -92,5 +93,4 @@ public class App
             }
         });
     }
-
 }
