@@ -92,7 +92,8 @@ public class App
         try
         {
             executablePath = guiFrame.getExecutablePath();
-            Runtime.getRuntime().exec("open " + executablePath);
+            String prefix = guiFrame.isWindows() ? "" : "open ";
+            Runtime.getRuntime().exec(prefix + executablePath);
         } catch (IOException e)
         {
             e.printStackTrace();
