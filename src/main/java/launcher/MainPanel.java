@@ -35,7 +35,7 @@ public class MainPanel extends JPanel
         BufferedImage img = null;
         try
         {
-            img = ImageIO.read(new File("src/main/resources/images/rl_icon_resized.png"));
+            img = ImageIO.read(getClass().getResourceAsStream("/main/resources/images/rl_icon_resized.png"));
         } catch (IOException e)
         {
             e.printStackTrace();
