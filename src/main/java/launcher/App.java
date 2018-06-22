@@ -10,7 +10,6 @@ public class App
 {
     static RLConfigModifier configModifier;
     static String settingsFilePath;
-    static String RLSettingsFileLocation;
     static String executablePath;
     static GuiFrame guiFrame;
 
@@ -18,12 +17,52 @@ public class App
     {
         guiFrame = new GuiFrame();
 
+        setButtonActionListeners();
+    }
+
+    /**
+     * Creates the configModifier with the specified settingsFilePath and
+     * reads the file.
+     */
+    private static void setupRLConfigModifier(){
+        configModifier = new RLConfigModifier(settingsFilePath);
+        configModifier.readFile();
+        configModifier.setOutputFilePath(settingsFilePath);
+    }
+
+    /**
+     * Sets the settingspath from the settingspage.
+     */
+    private static void setSettingsFilePath()
+    {
+        if(settingsFilePath == null) settingsFilePath = guiFrame.getSettingsPath();
+    }
+
+    /**
+     * Launches the game.
+     */
+    private static void launchGame(){
+        try
+        {
+            executablePath = guiFrame.getExecutablePath();
+            if(executablePath == null) throw new IOException();
+            Runtime.getRuntime().exec("open " + executablePath);
+        } catch (IOException e)
+        {
+            System.out.println("The path to the executable is not properly set.");
+        }
+    }
+
+    /**
+     * Sets the actionlisteners for the resolution buttons and the launch button.
+     */
+    private static void setButtonActionListeners() {
         guiFrame.mainPanel.setActionButtonNormal(new ActionListener()
         {
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                if(settingsFilePath == null) setSettingsFilePath();
+                setSettingsFilePath();
                 setupRLConfigModifier();
                 configModifier.setNormal();
                 configModifier.writeFile();
@@ -36,7 +75,7 @@ public class App
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                if(settingsFilePath == null) setSettingsFilePath();
+                setSettingsFilePath();
                 setupRLConfigModifier();
                 configModifier.setWide();
                 configModifier.writeFile();
@@ -54,48 +93,4 @@ public class App
         });
     }
 
-    private static void setupRLConfigModifier(){
-        configModifier = new RLConfigModifier(settingsFilePath);
-        configModifier.readFile();
-        configModifier.setOutputFilePath(settingsFilePath);
-    }
-
-    private static void setSettingsFilePath()
-    {
-        settingsFilePath = guiFrame.getSettingsPath();
-    }
-
-    /**
-     * Reading the settings from the settings.txt file
-     */
-    private static void readSettings(){
-        File file = new File(settingsFilePath);
-        try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
-            String line;
-            while((line = bufferedReader.readLine()) != null)
-            if(line.contains("settingslocation")){
-                RLSettingsFileLocation = line.split("=")[1];
-            } else if (line.contains("executablepath")){
-                executablePath = line.split("=")[1];
-            }
-            bufferedReader.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-    }
-
-    private static void launchGame(){
-        try
-        {
-            executablePath = guiFrame.getExecutablePath();
-            Runtime.getRuntime().exec("open " + executablePath);
-        } catch (IOException e)
-        {
-            e.printStackTrace();
-        }
-    }
 }
