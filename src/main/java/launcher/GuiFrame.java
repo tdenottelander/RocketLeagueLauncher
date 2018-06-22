@@ -33,4 +33,9 @@ public class GuiFrame extends JFrame
         //This will center the JFrame in the middle of the screen
         this.setLocationRelativeTo(null);
     }
+
+    public String getExecutablePath()
+    {
+        return settingsPanel.getPathToExecutable();
+    }
 }

@@ -12,12 +12,13 @@ public class App
     static final String settingsFilePath = "src/main/resources/settings.txt";
     static String RLSettingsFileLocation;
     static String executablePath;
+    static GuiFrame guiFrame;
 
     public static void main(String[] args)
     {
         readSettings();
 
-        GuiFrame guiFrame = new GuiFrame();
+        guiFrame = new GuiFrame();
 
         String filePath = RLSettingsFileLocation + "TASystemSettings.ini";
         configModifier = new RLConfigModifier(filePath);
@@ -82,7 +83,8 @@ public class App
     private static void launchGame(){
         try
         {
-            Runtime.getRuntime().exec(executablePath);
+            executablePath = guiFrame.getExecutablePath();
+            Runtime.getRuntime().exec("open " + executablePath);
         } catch (IOException e)
         {
             e.printStackTrace();
