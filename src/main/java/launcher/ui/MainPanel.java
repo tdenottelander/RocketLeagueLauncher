@@ -1,11 +1,10 @@
-package main.java.launcher;
+package main.java.launcher.ui;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 
 public class MainPanel extends JPanel

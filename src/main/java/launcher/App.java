@@ -1,6 +1,7 @@
 package main.java.launcher;
 
 import main.java.launcher.configmodifier.RLConfigModifier;
+import main.java.launcher.ui.GuiFrame;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -58,7 +59,7 @@ public class App
      * Sets the actionlisteners for the resolution buttons and the launch button.
      */
     private static void setButtonActionListeners() {
-        guiFrame.mainPanel.setActionButtonNormal(new ActionListener()
+        guiFrame.getMainPanel().setActionButtonNormal(new ActionListener()
         {
             @Override
             public void actionPerformed(ActionEvent e)
@@ -71,7 +72,7 @@ public class App
             }
         });
 
-        guiFrame.mainPanel.setActionButtonWide(new ActionListener()
+        guiFrame.getMainPanel().setActionButtonWide(new ActionListener()
         {
             @Override
             public void actionPerformed(ActionEvent e)
@@ -84,7 +85,7 @@ public class App
             }
         });
 
-        guiFrame.mainPanel.setActionButtonLaunchGame(new ActionListener()
+        guiFrame.getMainPanel().setActionButtonLaunchGame(new ActionListener()
         {
             @Override
             public void actionPerformed(ActionEvent e)

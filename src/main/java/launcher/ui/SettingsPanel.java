@@ -1,4 +1,4 @@
-package main.java.launcher;
+package main.java.launcher.ui;
 
 import javax.swing.*;
 

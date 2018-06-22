@@ -1,14 +1,15 @@
-package main.java.launcher;
+package main.java.launcher.ui;
 
 import javax.swing.*;
 
 public class GuiFrame extends JFrame
 {
 
-    final JTabbedPane globalPanel;
-    final MainPanel mainPanel;
-    final SettingsPanel settingsPanel;
+    private final JTabbedPane globalPanel;
 
+    private final MainPanel mainPanel;
+
+    private final SettingsPanel settingsPanel;
     public GuiFrame()
     {
         this.globalPanel = new JTabbedPane();
@@ -45,5 +46,15 @@ public class GuiFrame extends JFrame
 
     public boolean isWindows() {
         return mainPanel.isWindows();
+    }
+
+    public MainPanel getMainPanel()
+    {
+        return mainPanel;
+    }
+
+    public SettingsPanel getSettingsPanel()
+    {
+        return settingsPanel;
     }
 }
