@@ -16,8 +16,6 @@ public class MainPanel extends JPanel
     JButton buttonNormal;
     JButton buttonWide;
     JButton buttonLaunchGame;
-    private JRadioButton radioButtonWin;
-    private JRadioButton radioButtonMac;
 
     public MainPanel(){
         super();
@@ -30,7 +28,6 @@ public class MainPanel extends JPanel
 
         createImage();
         createTextField();
-        createRadioButtons();
         createButtons();
     }
 
@@ -52,20 +49,6 @@ public class MainPanel extends JPanel
         JLabel label = new JLabel("Select resolution:");
         textPanel.add(label);
         this.add(textPanel);
-    }
-
-    private void createRadioButtons(){
-        radioButtonWin = new JRadioButton("Windows");
-        radioButtonMac = new JRadioButton("Mac OS X");
-
-        ButtonGroup buttonGroup = new ButtonGroup();
-        buttonGroup.add(radioButtonWin);
-        buttonGroup.add(radioButtonMac);
-
-        JPanel radioPanel = new JPanel(new GridLayout(0, 1));
-        radioPanel.add(radioButtonWin);
-        radioPanel.add(radioButtonMac);
-        this.add(radioPanel);
     }
 
     private void createButtons(){
@@ -93,9 +76,5 @@ public class MainPanel extends JPanel
 
     public void setActionButtonLaunchGame(ActionListener actionListener){
         buttonLaunchGame.addActionListener(actionListener);
-    }
-
-    public boolean isWindows(){
-        return radioButtonWin.isSelected();
     }
 }

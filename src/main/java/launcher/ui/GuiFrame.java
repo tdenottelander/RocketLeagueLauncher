@@ -45,7 +45,7 @@ public class GuiFrame extends JFrame
     }
 
     public boolean isWindows() {
-        return mainPanel.isWindows();
+        return settingsPanel.isWindows();
     }
 
     public MainPanel getMainPanel()
