@@ -44,10 +44,6 @@ public class GuiFrame extends JFrame
         return settingsPanel.getPathToSettingsFile();
     }
 
-    public boolean isWindows() {
-        return settingsPanel.isWindows();
-    }
-
     public MainPanel getMainPanel()
     {
         return mainPanel;

@@ -49,7 +49,11 @@ public class App
         {
             executablePath = guiFrame.getExecutablePath();
             if(executablePath == null || executablePath.equals(SettingsPanel.UNDEFINED_TEXT)) throw new IncorrectPathException();
-            String prefix = guiFrame.isWindows() ? "" : "open ";
+
+            String OS = System.getProperty("os.name");
+            String prefix = ""; //Default for Windows
+            if(OS.equals("Mac OS X")) prefix = "open "; //Default for Mac
+
             String command = prefix + executablePath;
             System.out.println("Now running command: " + command);
             guiFrame.getMainPanel().setInfoMessage("Launching game...");
