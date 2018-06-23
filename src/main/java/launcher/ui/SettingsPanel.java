@@ -11,7 +11,7 @@ public class SettingsPanel extends JPanel
 
     private JLabel pathToSettingsFile;
     private JLabel pathToExecutable;
-    private final static String UNDEFINED_TEXT = "- undefined - ";
+    public final static String UNDEFINED_TEXT = "- undefined - ";
 
     public SettingsPanel(){
         super();

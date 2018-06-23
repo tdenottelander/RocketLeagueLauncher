@@ -17,6 +17,8 @@ public class MainPanel extends JPanel
     JButton buttonWide;
     JButton buttonLaunchGame;
 
+    final private JLabel infoLabel;
+
     public MainPanel(){
         super();
         this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
@@ -25,10 +27,22 @@ public class MainPanel extends JPanel
         this.imagePanel = new JPanel();
         this.textPanel = new JPanel();
         this.buttonPanel = new JPanel();
+        this.infoLabel = new JLabel();
 
         createImage();
         createTextField();
         createButtons();
+        createInfoLabel();
+
+
+    }
+
+    private void createInfoLabel()
+    {
+        this.infoLabel.setText("Info label");
+        this.infoLabel.setForeground(Color.red);
+        this.infoLabel.setVisible(true);
+        add(infoLabel);
     }
 
     private void createImage(){
@@ -76,5 +90,25 @@ public class MainPanel extends JPanel
 
     public void setActionButtonLaunchGame(ActionListener actionListener){
         buttonLaunchGame.addActionListener(actionListener);
+    }
+
+    public void setWarningMessage(String message) {
+        this.infoLabel.setForeground(Color.YELLOW);
+        setInfoLabel(message);
+    }
+
+    public void setErrorMessage (String message) {
+        this.infoLabel.setForeground(Color.RED);
+        setInfoLabel(message);
+    }
+
+    public void setInfoMessage(String message) {
+        this.infoLabel.setForeground(Color.GREEN);
+        setInfoLabel(message);
+    }
+
+    private void setInfoLabel (String message) {
+        this.infoLabel.setText(message);
+        this.setVisible(true);
     }
 }

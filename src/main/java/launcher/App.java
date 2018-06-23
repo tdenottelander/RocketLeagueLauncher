@@ -1,7 +1,9 @@
 package main.java.launcher;
 
 import main.java.launcher.configmodifier.RLConfigModifier;
+import main.java.launcher.exception.IncorrectPathException;
 import main.java.launcher.ui.GuiFrame;
+import main.java.launcher.ui.SettingsPanel;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -46,12 +48,20 @@ public class App
         try
         {
             executablePath = guiFrame.getExecutablePath();
-            if(executablePath == null) throw new IOException();
+            if(executablePath == null || executablePath.equals(SettingsPanel.UNDEFINED_TEXT)) throw new IncorrectPathException();
             String prefix = guiFrame.isWindows() ? "" : "open ";
-            Runtime.getRuntime().exec(prefix + executablePath);
+            String command = prefix + executablePath;
+            System.out.println("Now running command: " + command);
+            guiFrame.getMainPanel().setInfoMessage("Launching game...");
+            Runtime.getRuntime().exec(command);
         } catch (IOException e)
         {
-            System.out.println("The path to the executable is not properly set.");
+            System.out.println("Other exception");
+        } catch (IncorrectPathException e)
+        {
+            String message = "The path to the executable is not properly set.";
+            guiFrame.getMainPanel().setErrorMessage(message);
+            System.out.println(message);
         }
     }
 
@@ -68,7 +78,9 @@ public class App
                 setupRLConfigModifier();
                 configModifier.setNormal();
                 configModifier.writeFile();
-                System.out.println("Set resolution to 1920x1080");
+                String message = "Set resolution to 1920x1080";
+                guiFrame.getMainPanel().setInfoMessage(message);
+                System.out.println(message);
             }
         });
 
@@ -81,7 +93,9 @@ public class App
                 setupRLConfigModifier();
                 configModifier.setWide();
                 configModifier.writeFile();
-                System.out.println("Set resulotion to 3840x1080");
+                String message = "Set resolution to 3840x1080";
+                guiFrame.getMainPanel().setInfoMessage(message);
+                System.out.println(message);
             }
         });
 
